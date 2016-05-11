@@ -23,13 +23,19 @@ before_install:
   - build-dist
   - cd $BUILD_DIR
 
+install:
+  - cpanm --quiet --notest Devel::Cover::Report::Coveralls
+  - cpanm --quiet --notest --installdeps .
+
 script:
   - perl Makefile.PL
   - make
-  - prove -b -r -s -j$(test-jobs) $(test-files)
+  # - prove -b -r -s -j$(test-jobs) $(test-files)
+  - PERL5OPT=-MDevel::Cover=-coverage,statement,branch,condition,path,subroutine prove -b -r -s t
+  - cover
 
 after_success:
-  - coverage-report
+  - cover -report coveralls
 
 branches:
   only:
