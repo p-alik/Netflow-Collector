@@ -30,3 +30,7 @@ script:
 
 after_success:
   - coverage-report
+
+branches:
+  only:
+    - upstream
