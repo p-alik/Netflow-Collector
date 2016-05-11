@@ -1,5 +1,7 @@
 Netflow-Collector
 
+[![Build Status](https://travis-ci.org/p-alik/Netflow-Collector.png)](https://travis-ci.org/p-alik/Netflow-Collector)
+
 Netflow::Collector is a perl module, that aims to simplify your work by collecting of netflow data
 
 ```
