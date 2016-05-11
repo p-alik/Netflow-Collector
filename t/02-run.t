@@ -6,9 +6,9 @@ use Test::Exception;
 
 use_ok('Netflow::Collector');
 
-subtest "run autor subtest", sub {
+subtest "run autor collecting subtest", sub {
     $ENV{AUTHOR_TESTING} || plan skip_all => "without \$ENV{AUTHOR_TESTING}";
-    $ENV{NFC_PORT} || plan skip_all => "\$ENV{NFC_PORT} required for the test";
+    $ENV{NFC_PORT}       || plan skip_all => "requires \$ENV{NFC_PORT}";
 
     my $i = 0;
     my $c = new_ok(
@@ -16,10 +16,11 @@ subtest "run autor subtest", sub {
         [
             # default
             max_pkt_size => 1548,
+
             # just for coverage
-            max_rcv_buf  => 1024**2,
-            port         => $ENV{NFC_PORT},
-            dispatch     => sub {
+            max_rcv_buf => 1024**2,
+            port        => $ENV{NFC_PORT},
+            dispatch    => sub {
                 my ($p) = @_;
                 ok(my $v = unpack('n', $p), "unpack header version");
                 ++$i == 5 && die sprintf "got %d netflow packets v%d", $i, $v;
@@ -27,8 +28,28 @@ subtest "run autor subtest", sub {
         ]
     );
 
-    throws_ok { $c->run() } qr/got 5 netflow packets v\d/, "run";
+    throws_ok { $c->run() } qr/got 5 netflow packets v\d/, "collect";
+};
 
+subtest "run autor subtest to catch 'can not open socket' exception", sub {
+    $ENV{AUTHOR_TESTING} || plan skip_all => "without \$ENV{AUTHOR_TESTING}";
+    $ENV{NFC_BUSY_PORT}  || plan skip_all => "requires \$ENV{NFC_BUSY_PORT}";
+
+    my $i = 0;
+    my $c = new_ok(
+        'Netflow::Collector',
+        [
+            port     => $ENV{NFC_BUSY_PORT},
+            dispatch => sub {
+                my ($p) = @_;
+                ok(my $v = unpack('n', $p), "unpack header version");
+                ++$i == 5 && die sprintf "got %d netflow packets v%d", $i, $v;
+                }
+        ]
+    );
+
+    throws_ok { $c->run() } qr/couldn't open UDP socket at port/,
+        "connection faild";
 };
 
 subtest "run release subtest", sub {
