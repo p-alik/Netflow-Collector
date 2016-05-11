@@ -1,14 +1,5 @@
 package Netflow::Collector;
-$Netflow::Collector::VERSION = '0.01';
-{
-
-    package Netflow::Collector::Exception;
-    use Moose;
-    extends 'Throwable::Error';
-    use namespace::autoclean;
-    no Moose;
-    1;
-}
+$Netflow::Collector::VERSION = '0.01.01';
 
 use v5.10;
 use Moose;
@@ -78,7 +69,7 @@ has "port",
 
 if defined will be provided to
 
-C<IO::Socket::INET->setsockopt(SOL_SOCKET, SO_RCVBUF, $self->max_rcv_buf)>
+    IO::Socket::INET->setsockopt(SOL_SOCKET, SO_RCVBUF, $self->max_rcv_buf)
 
 =cut
 
