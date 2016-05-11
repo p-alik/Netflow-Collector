@@ -15,6 +15,7 @@ use Moose;
 use Moose::Util::TypeConstraints;
 use namespace::autoclean;
 
+use Netflow::Collector::Exception;
 use IO::Socket::INET;
 use IO::Select;
 use Socket qw/
@@ -116,7 +117,7 @@ sub _build__socket {
     );
 
     unless ($sock) {
-        M43::Netflow::Dispatcher::Exception->throw(
+        Netflow::Collector::Exception->throw(
             sprintf "couldn't open UDP socket at port '%s': $!",
             $self->port);
     }
@@ -128,7 +129,7 @@ sub _build__socket {
     my $sel = IO::Select->new($sock);
     unless ($sel->can_read(5)) {
         $sock->close();
-        M43::Netflow::Dispatcher::Exception->throw("can't read from socket $!");
+        Netflow::Collector::Exception->throw("socket connection timed out $!");
     }
 
     return $sock;
