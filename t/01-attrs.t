@@ -11,11 +11,12 @@ my $cn = "Netflow::Collector";
 use_ok($cn);
 
 has_attribute_ok($cn, $_) for qw/
-    dispatch
-    port
-    max_rcv_buf
-    max_pkt_size
     _socket
+    dispatch
+    max_pkt_size
+    max_rcv_buf
+    port
+    timeout
     /;
 
 can_ok($cn, "run");
@@ -30,6 +31,6 @@ foreach my $v (qw/max_rcv_buf max_pkt_size/) {
         $cn->new(port => 123, dispatch => sub { }, $v => 0);
     }
     qr/\d++ is not a positive integer/, "caught invalid $v exception";
-} ## end foreach $v (qw/ max_rcv_buf max_pkt_size/)
+} ## end foreach my $v (qw/max_rcv_buf max_pkt_size/)
 
 done_testing();

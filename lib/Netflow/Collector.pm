@@ -97,9 +97,24 @@ has "max_pkt_size",
     is      => "ro",
     default => sub {1548};
 
+=head2 timeout
+
+default 5
+
+=cut
+
+has "timeout",
+    isa     => "PositiveInt",
+    is      => "ro",
+    default => sub {5};
+
 =head2 _socket
 
 IO::Socket::INET object
+
+throws Netflow::Collector::Exception unless IO::Select->can_read($self->timeout)
+
+or can't open UDP socket at given port
 
 =cut
 
@@ -127,7 +142,7 @@ sub _build__socket {
         && $sock->setsockopt(SOL_SOCKET, SO_RCVBUF, $self->max_rcv_buf);
 
     my $sel = IO::Select->new($sock);
-    unless ($sel->can_read(5)) {
+    unless ($sel->can_read($self->timeout)) {
         $sock->close();
         Netflow::Collector::Exception->throw("socket connection timed out $!");
     }
