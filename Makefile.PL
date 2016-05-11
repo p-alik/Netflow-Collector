@@ -12,7 +12,21 @@ WriteMakefile(
     PL_FILES           => {},
     MIN_PERL_VERSION   => v5.10,
     CONFIGURE_REQUIRES => { 'ExtUtils::MakeMaker' => 0, },
-    BUILD_REQUIRES     => {
+    META_MERGE         => {
+        'meta-spec' => { version => 2 },
+        resources   => {
+            homepage   => 'https://github.com/p-alik/Netflow-Collector',
+            repository => {
+                type => 'git',
+                web  => 'https://github.com/p-alik/Netflow-Collector',
+                url  => 'git@github.com:p-alik/Netflow-Collector.git',
+            },
+            bugtracker => {
+                web => 'https://github.com/p-alik/Netflow-Collector/issues',
+            },
+        },
+    },
+    BUILD_REQUIRES => {
         'Test::More'      => 0,
         'Test::Moose'     => 0,
         'Test::Exception' => 0
