@@ -1,6 +1,14 @@
 Netflow-Collector
 
-the module aims to simplify collecting netflow data
+Netflow::Collector is a perl module, that aims to simplify your work by collecting of netflow data
+
+```
+use Netflow::Collector;
+
+my $foo = Netflow::Collector->new(port => 9999, dispatch => sub {..});
+$foo->run();
+
+```
 
 INSTALLATION
 
