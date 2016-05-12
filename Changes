@@ -3,3 +3,6 @@ Revision history for Netflow-Collector
 0.01    2016-05-11
         First version, released
 
+0.01.01 2016-05-11
+        rm inner Netflow::Collector::Exception defination
+
