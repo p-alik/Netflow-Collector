@@ -1,6 +1,7 @@
 Netflow-Collector
 =============
 
+[![CPAN version](https://badge.fury.io/pl/Netflow-Collector.png)](https://badge.fury.io/pl/Netflow-Collector)
 [![Build Status](https://travis-ci.org/p-alik/Netflow-Collector.png)](https://travis-ci.org/p-alik/Netflow-Collector)
 [![Coverage Status](https://coveralls.io/repos/github/p-alik/Netflow-Collector/badge.png)](https://coveralls.io/github/p-alik/Netflow-Collector)
 
