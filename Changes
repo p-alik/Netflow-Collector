@@ -1,8 +1,11 @@
 Revision history for Netflow-Collector
 
-0.01    2016-05-11
-        First version, released
+0.02    2016-05-27
+        clear dispatch reference on destroy
 
 0.01.01 2016-05-11
         rm inner Netflow::Collector::Exception defination
+
+0.01    2016-05-11
+        First version, released
 

@@ -1,5 +1,5 @@
 package Netflow::Collector;
-$Netflow::Collector::VERSION = '0.01.01';
+$Netflow::Collector::VERSION = '0.02';
 
 use v5.10;
 use Moose;
@@ -20,7 +20,7 @@ Netflow::Collector
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =cut
 
