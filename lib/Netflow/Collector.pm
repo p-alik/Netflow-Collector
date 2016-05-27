@@ -5,7 +5,10 @@ use v5.10;
 use Moose;
 use Moose::Util::TypeConstraints;
 use namespace::autoclean;
-use sigtrap qw/die normal-signals/;
+use sigtrap qw/
+    die
+    normal-signals
+    /;
 use Netflow::Collector::Exception;
 use IO::Socket::INET;
 use IO::Select;
