@@ -2,6 +2,7 @@ Revision history for Netflow-Collector
 
 0.02    2016-05-27
         clear dispatch reference on destroy
+        use sigtrap to catch system signals on die or HUP, INT, PIPE and TERM
 
 0.01.01 2016-05-11
         rm inner Netflow::Collector::Exception defination
