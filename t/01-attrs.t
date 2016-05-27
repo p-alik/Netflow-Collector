@@ -12,7 +12,7 @@ use_ok($cn);
 
 has_attribute_ok($cn, $_) for qw/
     _socket
-    dispatch
+    _dispatch
     max_pkt_size
     max_rcv_buf
     port
