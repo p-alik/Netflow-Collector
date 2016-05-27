@@ -5,7 +5,7 @@ use v5.10;
 use Moose;
 use Moose::Util::TypeConstraints;
 use namespace::autoclean;
-
+use sigtrap qw/die normal-signals/;
 use Netflow::Collector::Exception;
 use IO::Socket::INET;
 use IO::Select;
@@ -49,9 +49,11 @@ for a received packets responsible code reference
 
 =cut
 
-has "dispatch",
+has "_dispatch",
     is       => "ro",
     isa      => "CodeRef",
+    init_arg => "dispatch",
+    clearer  => "_clear_dispatch",
     required => 1;
 
 =head2 port
@@ -151,9 +153,13 @@ sub run {
     my ($self) = shift;
     my $sock = $self->_socket();
     while ($sock->recv(my $packet, $self->max_pkt_size)) {
-        $self->dispatch->($packet);
+        $self->_dispatch->($packet);
     }
 } ## end sub run
+
+sub DEMOLISH {
+    shift->_clear_dispatch();
+}
 
 no Moose;
 __PACKAGE__->meta->make_immutable;
