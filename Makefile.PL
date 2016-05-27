@@ -39,6 +39,7 @@ WriteMakefile(
         'Socket'                       => 0,
         'Throwable::Error'             => 0,
         'namespace::autoclean'         => 0,
+        'sigtrap'                      => 0,
     },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean => { FILES    => 'Netflow-Collector-*' },
