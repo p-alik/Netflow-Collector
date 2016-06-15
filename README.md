@@ -10,7 +10,7 @@ Netflow::Collector is a perl module, that aims to simplify your work by collecti
 INSTALLATION
 ------------
 To install this module, run the following commands:
-```
+```bash
 perl Makefile.PL
 make
 make test
